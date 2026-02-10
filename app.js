@@ -25,21 +25,23 @@ function validarTransaccion(importe, origen, fecha) {
 }
 
 function manejarEnvioFormulario() {
-    let x = document.forms['formularioTransaccion']['importe'].value;
-    let y = document.forms['formularioTransaccion']['origen'].value;
-    let z = document.forms['formularioTransaccion']['fecha'].value;
+    let importe = document.forms['formularioTransaccion']['importe'].value;
+    let origen = document.forms['formularioTransaccion']['origen'].value;
+    let fecha = document.forms['formularioTransaccion']['fecha'].value;
 
-    let esValida = validarTransaccion(x,y,z);
+    let resultado = validarTransaccion(importe,origen,fecha);
 
-    let importeNumero = Number(x);
+    let importeNumero = Number(importe);
 
-    if (x == null || importeNumero < 0){
+    if (importeNumero <= 0){
         alert("El importe no puede ser 0 o negativo.")
         return;
     }
 
-    if (!esValida){
-        alert("Algún campo se encuentra vacío o tiene valores incorrectos.")
+    if (!resultado.valido){
+        resultado.errores.forEach(error => {
+            alert(error)
+        });
         return;
     }
 }
