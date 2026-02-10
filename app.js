@@ -2,7 +2,7 @@ function validarTransaccion(importe, origen, fecha) {
     let errores = [];
     let valido;
 
-    if (importe == "" || fecha == "") {
+    if (importe == "") {
         errores.push("Error en el importe.")
     } if (origen == ""){
         errores.push("Error en el origen.")
