@@ -24,6 +24,12 @@ function validarTransaccion(importe,origen,fecha) {
     return check;
 }
 
+function ordenarTransacciones(arrayTransacciones) {
+    arrayTransacciones.sort(function (a,b) {
+        return b.fecha - a.fecha;
+    });
+};
+
 function crearTransaccion(importe,origen,fecha) {
     const transaccion = {
         id: siguienteId,
@@ -78,12 +84,6 @@ function manejarEnvioFormulario() {
     };
 };
 
-function ordenarTransacciones(arrayTransacciones) {
-    arrayTransacciones.sort(function (a,b) {
-        return b.fecha - a.fecha;
-    });
-};
-
 //=======================================================================
 
 var siguienteId;
@@ -100,6 +100,6 @@ if (datosGuardados){
 transaccionesGlobal.forEach(transaccion => {
     if (transaccion.id > maxId) {
         maxId = transaccion.id;
-        var siguienteId = maxId + 1;
+        siguienteId = maxId + 1;
     };
 });
