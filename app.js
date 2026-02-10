@@ -1,61 +1,3 @@
-function validarTransaccion(importe,origen,fecha) {
-    let errores = [];
-    let valido;
-
-    if (importe == "") {
-        errores.push("Error en el importe.");
-    } if (origen == "") {
-        errores.push("Error en el origen.");
-    } if (fecha == "") {
-        errores.push("Error en la fecha.");
-    }
-
-    if (errores.length > 0) {
-        valido = false;
-    } else {
-        valido = true;
-    };
-
-    const check = {
-        valido: valido,
-        errores: errores,
-    };
-
-    return check;
-}
-
-function ordenarTransacciones(arrayTransacciones) {
-    arrayTransacciones.sort(function (a,b) {
-        return b.fecha - a.fecha;
-    });
-};
-
-function crearTransaccion(importe,origen,fecha) {
-    const transaccion = {
-        id: siguienteId,
-        importe: importe,
-        origen: origen,
-        fecha: fecha,
-    }
-
-    transaccionesGlobal.push(transaccion);
-
-    siguienteId++;
-
-    localStorage.setItem("Transacciones", JSON.stringify(transaccionesGlobal));
-    return transaccion;
-};
-
-function leerTransacciones() {
-    let transacciones = localStorage.getItem("Transacciones");
-    if (transacciones) {
-        transacciones = JSON.parse(transacciones);
-        return transacciones;
-    } else {
-        return;
-    };
-};
-
 function manejarEnvioFormulario() {
     let importe = document.forms['formularioTransaccion']['importe'].value;
     let origen = document.forms['formularioTransaccion']['origen'].value;
@@ -82,6 +24,68 @@ function manejarEnvioFormulario() {
         crearTransaccion(importe,origen,new Date(fecha));
         ordenarTransacciones(transaccionesGlobal);
     };
+};
+
+function crearTransaccion(importe,origen,fecha) {
+    const transaccion = {
+        id: siguienteId,
+        importe: importe,
+        origen: origen,
+        fecha: fecha,
+    }
+
+    transaccionesGlobal.push(transaccion);
+
+    siguienteId++;
+
+    localStorage.setItem("Transacciones", JSON.stringify(transaccionesGlobal));
+    return transaccion;
+};
+
+function mostrarTransacciones() {
+    
+}
+
+function validarTransaccion(importe,origen,fecha) {
+    let errores = [];
+    let valido;
+
+    if (importe == "") {
+        errores.push("Error en el importe.");
+    } if (origen == "") {
+        errores.push("Error en el origen.");
+    } if (fecha == "") {
+        errores.push("Error en la fecha.");
+    }
+
+    if (errores.length > 0) {
+        valido = false;
+    } else {
+        valido = true;
+    };
+
+    const check = {
+        valido: valido,
+        errores: errores,
+    };
+
+    return check;
+}
+
+function leerTransacciones() {
+    let transacciones = localStorage.getItem("Transacciones");
+    if (transacciones) {
+        transacciones = JSON.parse(transacciones);
+        return transacciones;
+    } else {
+        return;
+    };
+};
+
+function ordenarTransacciones(arrayTransacciones) {
+    arrayTransacciones.sort(function (a,b) {
+        return b.fecha - a.fecha;
+    });
 };
 
 //=======================================================================
