@@ -1,20 +1,45 @@
-function validarTransaccion() {
-    
+function validarTransaccion(importe, origen, fecha) {
+    let errores = [];
+    let valido;
+
+    if (importe == "" || fecha == "") {
+        errores.push("Error en el importe.")
+    } if (origen == ""){
+        errores.push("Error en el origen.")
+    } if (fecha == "") {
+        errores.push("Error en la fecha.")
+    }
+
+    if (errores.length > 0){
+        valido = false;
+    } else {
+        valido = true
+    }
+
+    const check = {
+        valido: valido,
+        errores: errores,
+    };
+
+    return check;
+}
+
+function manejarEnvioFormulario() {
     let x = document.forms['formularioTransaccion']['importe'].value;
-    if (x == "") {
-        alert("El importe no puede estar en blanco.")
-        return false;
-    }
-
     let y = document.forms['formularioTransaccion']['origen'].value;
-    if (y == "") {
-        alert("El origen no puede estar en blanco.")
-        return false;
+    let z = document.forms['formularioTransaccion']['fecha'].value;
+
+    let esValida = validarTransaccion(x,y,z);
+
+    let importeNumero = Number(x);
+
+    if (x == null || importeNumero < 0){
+        alert("El importe no puede ser 0 o negativo.")
+        return;
     }
 
-    let z = document.forms['formularioTransaccion']['fecha'].value;
-    if (z == "") {
-        alert("La fecha no puede estar en blanco.")
-        return false;
+    if (!esValida){
+        alert("Algún campo se encuentra vacío o tiene valores incorrectos.")
+        return;
     }
-    }
+}
