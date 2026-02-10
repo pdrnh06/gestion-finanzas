@@ -8,7 +8,7 @@ function validarTransaccion(importe,origen,fecha) {
         errores.push("Error en el origen.");
     } if (fecha == "") {
         errores.push("Error en la fecha.");
-    };
+    }
 
     if (errores.length > 0) {
         valido = false;
@@ -86,20 +86,25 @@ function manejarEnvioFormulario() {
 
 //=======================================================================
 
-var siguienteId;
-var maxId = 0;
 var transaccionesGlobal;
+var siguienteId;
+
 var datosGuardados = JSON.parse(localStorage.getItem("Transacciones"));
 
 if (datosGuardados){
     transaccionesGlobal = datosGuardados;
 } else {
-    var transaccionesGlobal = [];
+    transaccionesGlobal = [];
 };
+
+var maxId = 0;
 
 transaccionesGlobal.forEach(transaccion => {
     if (transaccion.id > maxId) {
         maxId = transaccion.id;
-        siguienteId = maxId + 1;
-    };
+    }
 });
+
+siguienteId = maxId + 1;
+
+ordenarTransacciones(transaccionesGlobal);
