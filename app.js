@@ -1,4 +1,5 @@
-function validarTransaccion(importe, origen, fecha) {
+function validarTransaccion(importe,origen,fecha) {
+
     let errores = [];
     let valido;
 
@@ -24,7 +25,38 @@ function validarTransaccion(importe, origen, fecha) {
     return check;
 }
 
+function crearTransaccion(importe,origen,fecha) {
+
+    const transaccion = {
+        id: siguienteId,
+        importe: importe,
+        origen: origen,
+        fecha: fecha,
+    }
+
+    transacciones.push(transaccion);
+
+    siguienteId++;
+
+    localStorage.setItem("Transacciones", JSON.stringify(transacciones));
+
+    return transaccion;
+}
+
+function leerTransacciones() {
+    let transacciones = localStorage.getItem("Transacciones");
+    if (transacciones) {
+        transacciones = console.log(JSON.parse(transacciones));
+        return transacciones;
+    } else {
+        console.log("No hay ninguna transacción actualmente.")
+        return;
+    }
+    
+}
+
 function manejarEnvioFormulario() {
+
     let importe = document.forms['formularioTransaccion']['importe'].value;
     let origen = document.forms['formularioTransaccion']['origen'].value;
     let fecha = document.forms['formularioTransaccion']['fecha'].value;
@@ -33,8 +65,11 @@ function manejarEnvioFormulario() {
 
     let importeNumero = Number(importe);
 
-    if (importeNumero <= 0){
-        alert("El importe no puede ser 0 o negativo.")
+    if (importeNumero == 0){
+        alert("El importe no puede ser 0.")
+        return;
+    } if (importeNumero < 0){
+        alert("El importe no puede ser negativo.")
         return;
     }
 
@@ -43,5 +78,10 @@ function manejarEnvioFormulario() {
             alert(error)
         });
         return;
+    } else {
+        crearTransaccion(importe,origen,fecha);
     }
 }
+
+var transacciones = [];
+var siguienteId = 1;
