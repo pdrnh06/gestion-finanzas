@@ -23,6 +23,7 @@ function manejarEnvioFormulario() {
     } else {
         crearTransaccion(importe,origen,new Date(fecha));
         ordenarTransacciones(transaccionesGlobal);
+        mostrarTransacciones();
     };
 };
 
@@ -43,7 +44,20 @@ function crearTransaccion(importe,origen,fecha) {
 };
 
 function mostrarTransacciones() {
-    
+    let contenedorTransacciones = document.getElementById("contenedorTransacciones");
+    contenedorTransacciones.innerHTML = "";
+
+    transaccionesGlobal.forEach(transaccion => {
+        let parrafoTransacciones = document.createElement("p");
+
+        let fechaFormateada = new Date(transaccion.fecha).toLocaleDateString();
+
+        let texto = `${fechaFormateada} | ${transaccion.origen} | ${transaccion.importe}€`;
+
+        parrafoTransacciones.textContent = texto;
+
+        contenedorTransacciones.appendChild(parrafoTransacciones);
+    });
 }
 
 function validarTransaccion(importe,origen,fecha) {
@@ -112,3 +126,4 @@ transaccionesGlobal.forEach(transaccion => {
 siguienteId = maxId + 1;
 
 ordenarTransacciones(transaccionesGlobal);
+mostrarTransacciones();
