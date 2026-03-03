@@ -6,20 +6,76 @@
     <script src="app.js" defer></script>
 </head>
 <body>
-    <form name="formularioTransaccion">
-        <label for="importe">Importe: </label>
-        <br>
-        <input type="text" name="importe">
-        <br>
-        <label for="origen">Origen: </label>
-        <br>
-        <input type="text" name="origen">
-        <br>
-        <label for="fecha">Fecha: </label>
-        <br>
-        <input type="date" name="fecha">
-        <br><br>
-        <input type="button" value="Enviar" onclick="manejarEnvioFormulario();">
-    </form>
-    <div id="contenedorTransacciones"></div>
+
+    <div class="layoutPrincipal">
+        <div class="carta">
+            <h3>Registro de transacciones</h3>
+            <hr>
+            <form name="formularioTransaccion">
+                <label for="importe">Importe</label>
+                <input type="text" name="importe">
+                <br>
+                <label for="origen">Origen</label>
+                <input type="text" name="origen">
+                <br>
+                <label for="fecha">Fecha</label>
+                <input type="date" name="fecha">
+                <br>
+                <input type="button" value="Enviar" onclick="manejarEnvioFormulario();" class="boton">
+            </form>
+        </div>
+
+        <div class="carta">
+            <table class="tableTransacciones">
+                <caption class="captionTransacciones">
+                    Transacciones realizadas
+                </caption>
+                <thead>
+                    <tr>
+                        <th class="thTransacciones">Fecha</th>
+                        <th class="thTransacciones">Origen</th>
+                        <th class="thTransacciones">Importe</th>
+                    </tr>
+                </thead>
+                <tbody id="cuerpoTransacciones">
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+    <footer>
+        <div class="carta">
+            <h2>Consejos de ahorro</h2>
+            <table style="margin: 0px auto;">
+                <thead>
+                    <tr>
+                        <th>Cantidad a ahorrar</th>
+                        <th>Motivo de ahorro</th>
+                        <th>Ejemplos</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>50%</td>
+                        <td>Gastos fijos</td>
+                        <td>Alquiler, comida, transporte...</td>
+                    </tr>
+                    <tr>
+                        <td>30%</td>
+                        <td>Lujos</td>
+                        <td>Salidas, ropa, juegos...</td>
+                    </tr>
+                    <tr>
+                        <td>20%</td>
+                        <td>Ahorros/Inversiones</td>
+                        <td>10% a corto plazo y 10% a largo plazo</td>
+                    </tr>
+                    <tr>
+                        <td colspan="3">SIEMPRE AHORRAR MÍNIMO EL 10%</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </footer>
+
 </body>

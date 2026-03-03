@@ -43,23 +43,6 @@ function crearTransaccion(importe,origen,fecha) {
     return transaccion;
 };
 
-function mostrarTransacciones() {
-    let contenedorTransacciones = document.getElementById("contenedorTransacciones");
-    contenedorTransacciones.innerHTML = "";
-
-    transaccionesGlobal.forEach(transaccion => {
-        let parrafoTransacciones = document.createElement("p");
-
-        let fechaFormateada = new Date(transaccion.fecha).toLocaleDateString();
-
-        let texto = `${fechaFormateada} | ${transaccion.origen} | ${transaccion.importe}€`;
-
-        parrafoTransacciones.textContent = texto;
-
-        contenedorTransacciones.appendChild(parrafoTransacciones);
-    });
-}
-
 function validarTransaccion(importe,origen,fecha) {
     let errores = [];
     let valido;
@@ -102,6 +85,39 @@ function ordenarTransacciones(arrayTransacciones) {
     });
 };
 
+// Renderizado
+function mostrarTransacciones() {
+    let cuerpoTransacciones = document.getElementById("cuerpoTransacciones");
+    cuerpoTransacciones.innerHTML = "";
+
+    transaccionesGlobal.forEach(transaccion => {
+        let nuevaFila = document.createElement("tr");
+        nuevaFila.addEventListener("click", () => seleccionar(nuevaFila));
+
+        let datosFecha = document.createElement("td");
+        let datosOrigen = document.createElement("td");
+        let datosImporte = document.createElement("td");
+
+        let fechaFormateada = new Date(transaccion.fecha).toLocaleDateString();
+        let origen = transaccion.origen;
+        let importe = transaccion.importe;
+
+        datosFecha.textContent = fechaFormateada;
+        datosOrigen.textContent = origen;
+        datosImporte.textContent = importe + "€";
+
+        nuevaFila.appendChild(datosFecha);
+        nuevaFila.appendChild(datosOrigen);
+        nuevaFila.appendChild(datosImporte);
+
+        cuerpoTransacciones.appendChild(nuevaFila);
+    });
+}
+
+function seleccionar(fila) {
+    fila.classList.toggle("seleccionado");
+}
+
 //=======================================================================
 
 var transaccionesGlobal;
@@ -110,6 +126,10 @@ var siguienteId;
 var datosGuardados = JSON.parse(localStorage.getItem("Transacciones"));
 
 if (datosGuardados){
+    datosGuardados.forEach(transaccion => {
+    transaccion.fecha = new Date(transaccion.fecha);
+    });
+
     transaccionesGlobal = datosGuardados;
 } else {
     transaccionesGlobal = [];

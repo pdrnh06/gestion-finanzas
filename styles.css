@@ -1,3 +1,88 @@
+.layoutPrincipal {
+  display: flex;
+  margin: 40px auto;
+  gap: 20px;
+  max-width: 75%;
+}
+
+.carta {
+  background-color: #E7E3DC;
+  padding: 40px;
+  border-radius: 4px;
+  box-shadow: 0px 0px 10px 0px;
+  margin: 0px auto;
+}
+
 body {
-    background-color: aqua;
+    background-color: #EBEBE6;
+    font-family: sans-serif;
+    color: #2C2C2C;
+}
+
+footer {
+  text-align: center;
+}
+
+/* Estilos para el formulario */
+
+.boton {
+  background-color: #F5F5F5;
+  color: #2C2C2C;
+  padding: 8px;
+  transition: background-color 0.3s;
+  transition: color 0.3s;
+  border-radius: 4px;
+}
+
+.boton:hover {
+  background-color: #2C2C2C;
+  color: #EBEBE6;
+  cursor: pointer;
+}
+
+input {
+  background-color: #F5F5F5;
+  margin: 5px;
+  padding: 3px;
+  border: 1px solid #2C2C2C;
+  border-radius: 4px;
+  width: 100%;
+  border: 0px;
+}
+
+input:focus {
+  outline: 1px solid;
+}
+
+/* Estilos para la tabla */
+
+.seleccionado{
+    background-color: #CCC2B2;
+}
+
+th {
+    background-color: #2C2C2C;
+    color: #EBEBE6;
+    padding: 8px 10px;
+}
+
+td {
+  padding: 8px 10px;
+  text-align: center;
+}
+
+caption {
+  caption-side: bottom;
+  padding: 10px;
+}
+
+table {
+  border-collapse: collapse;
+  font-family: sans-serif;
+  letter-spacing: 1px;
+}
+
+th[scope="col"] {
+  background-color: #121212;
+  color: #EBEBE6;
 }
